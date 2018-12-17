@@ -18,7 +18,7 @@ export default (
   //   });
 
   const args = ["commit"];
-  if (message) args.push("-m", `"${message}"`);
+  if (message) args.push("-m", `${message}`);
   if (options.allowEmpty) args.push("--allow-empty");
 
   if (options.dry) return console.log(`git ${args.join(" ")}`);
