@@ -48,6 +48,15 @@ export default {
 
     const message = Transform.commitMessage(response);
     log.debug(`Commit message: ${message}`);
-    MakeCommit(log, message, { dry: argv.dry, allowEmpty: argv.empty });
+    const child = MakeCommit(log, message, {
+      dry: argv.dry,
+      allowEmpty: argv.empty
+    });
+
+    if (child) {
+      child.stdin.pipe(process.stdin);
+      child.stdout.pipe(process.stdout);
+      child.stderr.pipe(process.stderr);
+    }
   }
 } as CommandSetting;

@@ -27,9 +27,7 @@ export default (
 
   if (options.dry) console.log(command);
   else {
-    const child = exec(command);
-    child.stdin.pipe(process.stdin);
-    child.stdout.pipe(process.stdout);
-    child.stderr.pipe(process.stderr);
+    return exec(command);
   }
+  return;
 };
