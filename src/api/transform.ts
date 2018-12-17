@@ -53,22 +53,23 @@ export const Transform = {
   },
 
   commitMessage: (response: any) => {
+    let message = `${response.type}`;
+    // Add scope
+    if (isExist(response.scope)) message += `(${response.scope}): `;
+    else message += `: `;
+    // Add subject
+    message += response.subject;
+    // Add body
+    if (isExist(response.body)) message += `\n\n${response.body}`;
+    // Generate footer
+    const is = response.issues;
     let footer = "";
-    if (response.issues && response.issues.length > 0)
-      footer +=
-        `This ` +
-        response.issues.map((v: string) => `closes ${v}`).join(", ") +
-        `\n`;
-    if (isExist(response.breakchange)) footer += response.breakchange;
-
-    const msg = `${response.type}${
-      isExist(response.scope) ? `(${response.scope})` : ""
-    }: ${response.subject}
-
-${isExist(response.body) ? `${response.body}\n\n` : ""}${
-      isExist(footer) ? `${footer}` : ""
-    }`;
-
-    return msg;
+    if (is && is.length > 0)
+      footer += `This will ${is.map((v: string) => `closes ${v}`).join(", ")}`;
+    if (isExist(response.breakchange)) footer += `\n${response.breakchange}`;
+    // Add footer
+    if (footer) message += `${footer}`;
+    // Return
+    return message;
   }
 };

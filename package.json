@@ -1,6 +1,6 @@
 {
   "name": "committ",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "angular commit prompts",
   "main": "index.ts",
   "bin": ".caches/committ.js",
