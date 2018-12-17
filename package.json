@@ -1,6 +1,6 @@
 {
   "name": "committ",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "angular commit prompts",
   "main": "index.ts",
   "bin": ".caches/committ.js",
@@ -61,6 +61,7 @@
     "clean": "rimraf bin .caches *.log log",
     "clean:all": "rimraf bin .caches *.log log node_modules yarn.lock",
     "build": "yarn compile:prod && pkg --out-path bin .",
+    "install:local": "cp bin/committ-macos /usr/local/bin/committ",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

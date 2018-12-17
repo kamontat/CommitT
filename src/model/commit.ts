@@ -1,6 +1,6 @@
 import { Logger } from "./logger";
 
-const exec = require("child_process").exec;
+const spawn = require("child_process").spawn;
 
 export default (
   _: Logger,
@@ -21,13 +21,8 @@ export default (
   if (message) args.push("-m", `"${message}"`);
   if (options.allowEmpty) args.push("--allow-empty");
 
-  // args.push(...processArgs);
-
-  const command = `git ${args.join(" ")}`;
-
-  if (options.dry) console.log(command);
+  if (options.dry) return console.log(`git ${args.join(" ")}`);
   else {
-    return exec(command);
+    return spawn(`git`, args, { stdio: "inherit" });
   }
-  return;
 };
